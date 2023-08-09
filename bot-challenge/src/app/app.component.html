@@ -1,0 +1,33 @@
+<div class="ui-wrapper" #botUi>
+  <div class="step-details">
+    <div>
+      <h3 class="step-title">{{activeStep?.title}}</h3>
+
+      <ng-container [ngSwitch]="activeStep?.content?.type">
+        <p *ngSwitchCase="stepContentType.Text" class="step-description">{{activeStep!.content.text}}</p>
+        <app-input-action
+          *ngSwitchCase="stepContentType.Input"
+          [(extraMessageMetadata)]="extraMessageMetadata"
+          [label]="activeStep!.content.label!"
+        />
+      </ng-container>
+
+    </div>
+    <div class="actions" *ngIf="activeStep?.manualMoveForwardOnly">
+      <button (click)="stepMoveForward()">Move forward</button>
+    </div>
+  </div>
+
+  <div class="hook-btns">
+    <div
+      class="action"
+      *ngFor="let action of botActions"
+      [class.disabled]="isActionDisabled(action)"
+      (click)="handleAction(action)"
+    >
+      <img class="icon" [src]="buildIconUrl(action.icon)" />
+      <p>{{action.title}}</p>
+      <p>{{action.description}}</p>
+    </div>
+  </div>
+</div>  

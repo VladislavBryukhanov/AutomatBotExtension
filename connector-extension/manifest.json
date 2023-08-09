@@ -1,0 +1,19 @@
+{
+  "manifest_version": 2,
+  "name": "Bot Extension",
+  "version": "1.0",
+  "description": "Angular Bot Extension",
+  "browser_action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "contentScript.js"
+      ],
+      "matches": [
+        "http://localhost:4200/*"
+      ]
+    }
+  ]
+}
